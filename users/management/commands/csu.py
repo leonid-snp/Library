@@ -9,6 +9,6 @@ class Command(BaseCommand):
             email='admin@admin.com',
         )
         user.set_password('12345')
-        user.is_staff=True
-        user.is_superuser=True
+        user.is_staff = True
+        user.is_superuser = True
         user.save()
