@@ -1,3 +1,82 @@
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
+from config.settings import NULLABLE
+
+
+class Author(models.Model):
+    first_name = models.CharField(
+        unique=True,
+        max_length=60,
+        verbose_name='Имя автора',
+        help_text='Укажите имя автора книги'
+    )
+    last_name = models.CharField(
+        unique=True,
+        max_length=60,
+        verbose_name='Фамилия автора',
+        help_text='Укажите фамилию автора книги'
+    )
+    biography = models.TextField(
+        verbose_name='Биография автора',
+        help_text='Заполните биографию автора'
+    )
+    date_birth = models.DateField(
+        default=timezone.now,
+        verbose_name='Дата рождения',
+        help_text='Укажите дату рождения автора'
+    )
+    date_death = models.DateField(
+        verbose_name='Дата смерти',
+        help_text='Укажите дату смерти автора',
+        **NULLABLE
+    )
+
+    def __str__(self):
+        return f'{self.date_death} {self.date_birth}'
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
+
+
+class Book(models.Model):
+    GENRE = (
+        ('Comedy','Комедия'),
+        ('Horror', 'Ужасы'),
+        ('fantasy', 'Фантастика')
+    )
+    STATUS = (
+        ('Issued', 'Выдана'),
+        ('In_stock', 'В наличии')
+    )
+    name = models.CharField(
+        unique=True,
+        max_length=60,
+        verbose_name='Название книги',
+        help_text='Укажите название книги'
+    )
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        verbose_name='Автор книги',
+        help_text='Укажите автора книги'
+    )
+    genre = models.CharField(
+        choices=GENRE,
+        verbose_name='Жанр книги',
+        help_text='Укажите жанр книги',
+    )
+    status = models.CharField(
+        choices=STATUS,
+        verbose_name='',
+        help_text='',
+        default=STATUS[1]
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
