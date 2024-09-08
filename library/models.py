@@ -22,7 +22,7 @@ class Author(models.Model):
         help_text='Заполните биографию автора'
     )
     date_birth = models.DateField(
-        default=timezone.now,
+        default=timezone.localdate,
         verbose_name='Дата рождения',
         help_text='Укажите дату рождения автора'
     )
@@ -69,8 +69,8 @@ class Book(models.Model):
     )
     status = models.CharField(
         choices=STATUS,
-        verbose_name='',
-        help_text='',
+        verbose_name='Статус книги',
+        help_text='Укажите статус книги',
         default=STATUS[1]
     )
 
