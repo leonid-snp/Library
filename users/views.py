@@ -2,6 +2,8 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
 
+from library.models import Book
+from library.views import BookUpdateAPIView
 from users.models import User
 from users.serializers import UserSerializer
 
@@ -29,7 +31,6 @@ class UserUpdateAPIView(UpdateAPIView):
         user = serializer.save()
         user.set_password(user.password)
         user.save()
-
 
 class UserDestroyAPIView(DestroyAPIView):
     queryset = User.objects.all()

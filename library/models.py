@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from config.settings import NULLABLE
+from users.models import User
 
 
 class Author(models.Model):
@@ -33,7 +34,7 @@ class Author(models.Model):
     )
 
     def __str__(self):
-        return f'{self.date_death} {self.date_birth}'
+        return f'{self.last_name} {self.first_name}'
 
     class Meta:
         verbose_name = 'Автор'
@@ -71,7 +72,14 @@ class Book(models.Model):
         choices=STATUS,
         verbose_name='Статус книги',
         help_text='Укажите статус книги',
-        default=STATUS[1]
+        default=STATUS[1][0]
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        verbose_name='Пользователь книги',
+        help_text='Укажите пользователя книги',
+        **NULLABLE
     )
 
     def __str__(self):
