@@ -6,6 +6,9 @@ from users.models import User
 
 
 class Author(models.Model):
+    """
+    Модель `Автор` - автор книги.
+    """
     first_name = models.CharField(
         unique=True,
         max_length=60,
@@ -33,7 +36,11 @@ class Author(models.Model):
         **NULLABLE
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Возвращает строку представления модели.
+        :return: (str) представление модели
+        """
         return f'{self.last_name} {self.first_name}'
 
     class Meta:
@@ -42,8 +49,11 @@ class Author(models.Model):
 
 
 class Book(models.Model):
+    """
+    Модель `Книга` - книга в библиотеки.
+    """
     GENRE = (
-        ('Comedy','Комедия'),
+        ('Comedy', 'Комедия'),
         ('Horror', 'Ужасы'),
         ('fantasy', 'Фантастика')
     )
@@ -83,6 +93,10 @@ class Book(models.Model):
     )
 
     def __str__(self):
+        """
+        Возвращает строку представления модели.
+        :return: (str) представление модели
+        """
         return self.name
 
     class Meta:

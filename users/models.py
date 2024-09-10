@@ -3,6 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
+    """
+    Модель `Пользователь` - клиент зарегистрированный на сайте.
+    """
     username = None
     email = models.EmailField(
         unique=True,
