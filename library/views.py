@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
@@ -108,6 +109,8 @@ class BookListAPIView(ListAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'author', 'genre']
 
     def get_queryset(self) -> list[object,]:
         """
