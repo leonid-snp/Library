@@ -5,7 +5,7 @@
 - `git clone git@github.com:leonid-snp/Library.git`
 
 ### Перейдите в проект командой
-- `cd Habit_reminder/`
+- `cd Library/`
 
 ### Для работы заполните файл [.env.example](.env.example) затем переименуйте его в [.env](.env)
 
